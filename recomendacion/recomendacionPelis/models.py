@@ -25,6 +25,6 @@ class Usuario(models.Model):
     puntuacion = models.ManyToManyField(Pelicula, through='Puntuacion')
 
 class Puntuacion(models.Model):
-    usuario = models.ForeignKey(Usuario)
-    pelicula = models.ForeignKey(Pelicula)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)
     valoracion = models.IntegerField(max_length=1)
