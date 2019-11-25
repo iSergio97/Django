@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="900ee144-f3eb-4d81-bdee-f55336c1fb52" name="Default Changelist" comment="" />
+    <list default="true" id="900ee144-f3eb-4d81-bdee-f55336c1fb52" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +24,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1U4l0JB8PwsaZkauFBcLBa6gR6g" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -88,12 +91,35 @@
       <updated>1574623523491</updated>
       <workItem from="1574623524875" duration="4783000" />
       <workItem from="1574696270701" duration="201000" />
-      <workItem from="1574700102000" duration="3283000" />
+      <workItem from="1574700102000" duration="4140000" />
     </task>
+    <task id="LOCAL-00001" summary="Se ha añadido varios htmls para descomponer al mínimo cada parte del código HTML para minimizar la carga de la página. &#10;&#10;---&#10;Se ha añadido un nav.html para los links de la barra de navegación.&#10;Se ha añadido usuarios.html donde se mostrarán las consultas sobre usuarios.&#10;Se ha añdido directores.html donde se mostrarán las consultas sobre los directores.&#10;Se ha añadido peliculas.html donde se mostrarán las consultas sobre las películas.">
+      <created>1574705098656</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574705098656</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Se ha añadido varios htmls para descomponer al mínimo cada parte del código HTML para minimizar la carga de la página. &#10;&#10;---&#10;Se ha añadido un nav.html para los links de la barra de navegación.&#10;Se ha añadido usuarios.html donde se mostrarán las consultas sobre usuarios.&#10;Se ha añdido directores.html donde se mostrarán las consultas sobre los directores.&#10;Se ha añadido peliculas.html donde se mostrarán las consultas sobre las películas." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se ha añadido varios htmls para descomponer al mínimo cada parte del código HTML para minimizar la carga de la página. &#10;&#10;---&#10;Se ha añadido un nav.html para los links de la barra de navegación.&#10;Se ha añadido usuarios.html donde se mostrarán las consultas sobre usuarios.&#10;Se ha añdido directores.html donde se mostrarán las consultas sobre los directores.&#10;Se ha añadido peliculas.html donde se mostrarán las consultas sobre las películas." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
