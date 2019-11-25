@@ -8,11 +8,20 @@ class Pelicula(models.Model):
     fechaEstreno = models.DateField()
     IMDbURL = models.URLField()
 
-
 class Categoria(models.Model):
     idCategoria = models.IntegerField(primary_key= True)
     nombre = models.CharField(max_length=50)
     pelicula = models.ManyToManyField(Pelicula)
+
+class Ocupacion(models.Model):
+    nombre = models.CharField(max_length= 50)
+
+class Usuario(models.Model):
+    idUsuario = models.IntegerField(primary_key= True)
+    edad = models.IntegerField()
+    sexo = models.CharField(max_length=1)
+    ocupacion = models.ForeignKey(Ocupacion, on_delete=models.CASCADE)
+    codigoPostal = models.IntegerField()
 
 class Puntuacion(models.Model):
     usuario = models.ForeignKey(Usuario)
