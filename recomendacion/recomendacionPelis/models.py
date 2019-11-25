@@ -22,7 +22,7 @@ class Usuario(models.Model):
     sexo = models.CharField(max_length=1)
     ocupacion = models.ForeignKey(Ocupacion, on_delete=models.CASCADE)
     codigoPostal = models.IntegerField()
-    puntuacion = models.ManyToManyField(Pelicula, through='Puntuacion')
+    puntuaciones = models.ManyToManyField(Pelicula, through='Puntuacion')
 
 class Puntuacion(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
