@@ -10,12 +10,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="nav">
-            <a class="nav-link" href="/"> Inicio </a>
-            <a class="nav-link" href="/usuarios"> Usuarios </a>
-            <a class="nav-link" href="/peliculas"> Películas </a>
-            <a class="nav-link" href="/directores"> Directores </a>
-</nav>
+{% include "nav.html" %}
 <h1> Práctica de Django</h1>
 
 {% block content %} {% endblock %}

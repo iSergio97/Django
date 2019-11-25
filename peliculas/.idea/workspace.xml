@@ -18,11 +18,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1U4l0JB8PwsaZkauFBcLBa6gR6g" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/peliculas/plantillas" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -85,7 +88,7 @@
       <updated>1574623523491</updated>
       <workItem from="1574623524875" duration="4783000" />
       <workItem from="1574696270701" duration="201000" />
-      <workItem from="1574700102000" duration="2220000" />
+      <workItem from="1574700102000" duration="3283000" />
     </task>
     <servers />
   </component>
