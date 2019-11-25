@@ -27,4 +27,4 @@ class Usuario(models.Model):
 class Puntuacion(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)
-    valoracion = models.IntegerField(max_length=1)
+    valoracion = models.IntegerField()
