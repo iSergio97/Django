@@ -1,0 +1,6 @@
+{% extends 'index.html' %}
+{% block content %}
+{% for ocupacion in ocupaciones %}
+    <p>{{ ocupacion.nombre }}</p>
+{% endfor %}
+{% endblock %}
