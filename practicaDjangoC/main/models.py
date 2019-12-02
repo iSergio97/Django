@@ -8,7 +8,7 @@ class Evento(models.Model):
     tipo = models.TextField()
     fechaInicio = models.DateField()
     precio = models.IntegerField()
-    lenguages = models.TextField()
+    lenguajes = models.TextField()
     municipio = models.TextField()
     codigo = models.IntegerField()
 
