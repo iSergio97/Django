@@ -41,3 +41,8 @@ def populateEvents():
     Evento.objects.bulk_create(lista)
     print("Populación completada con éxito")
     print("Se han cargado " + str(len(lista)) + " datos")
+
+
+def mostrar_eventos_codigo(request):
+    eventos =Evento.objects.all().order_by('codigo')
+    return render(request, 'eventos_municipio.html', {'eventos':eventos, 'STATIC_URL':settings.STATIC_URL})

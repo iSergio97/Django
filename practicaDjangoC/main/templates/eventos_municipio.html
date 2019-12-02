@@ -1,0 +1,24 @@
+{% extends 'master.html' %}
+
+{% block titulo %} Lista de Eventos {% endblock %}
+
+{% block ocupacionesActiva %} uk-active {% endblock %}
+
+
+{% block contenido %} 
+    <div class="uk-animation-fade">
+	    <div class="uk-accordion" data-uk-accordion="{collapse: false}">
+	    	{% regroup eventos by codigo as grouped %}
+	    	{% for group in grouped %}
+		    	<h3 class="uk-accordion-title">Código: {{group.grouper}} ({{group.list|length}} eventos)</h3>
+		    	<div class="uk-accordion-content">
+		    		<ul class="uk-list  uk-list-striped">
+		    		{% for event in group.list %}
+						<li><strong>Nombre del Evento:</strong> {{event.nombre}} | <strong>Fecha de Inicio:</strong> {{event.fechaInicio}} | <strong>Precio:</strong> {{event.precio}} | <strong>Municipio/s:</strong> {{event.municipio}} </li>
+					{% endfor %}
+				    </ul>
+		    	</div>
+	    	{% endfor %}
+		</div>
+	</div>
+{% endblock %}
