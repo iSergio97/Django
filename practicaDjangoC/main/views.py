@@ -1,5 +1,5 @@
 # encoding:utf-8
-from main.models import Usuario, Ocupacion, Puntuacion, Pelicula, Categoria
+from main.models import Evento
 from main.forms import UsuarioBusquedaForm, PeliculaBusquedaYearForm
 from django.shortcuts import render
 from django.db.models import Avg
@@ -10,25 +10,13 @@ from datetime import datetime
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+import pandas
 
 path = "data"
-
-
-# Funcion de acceso restringido que carga los datos en la BD
-@login_required(login_url='/ingresar')
-def populateDatabase(request):
-    populateOccupations()
-    populateGenres()
-    u = populateUsers()
-    m = populateMovies()
-    populateRatings(u, m)  # USAMOS LOS DICCIONARIOS DE USUARIOS Y PELICULAS PARA ACELERAR LA CARGA EN PUNTUACIONES
-    logout(request)  # se hace logout para obligar a login cada vez que se vaya a poblar la BD
-    return HttpResponseRedirect('/index.html')
-
-
-def mostrar_ocupaciones(request):
+'''
+def mostrar_eventos(request):
     # Aquí ordena los usuarios en la query por ocupación
-    usuarios = Usuario.objects.all().order_by('ocupacion')
+    eventos = Eventos.objects.all().order_by('ocupacion')
     return render(request, 'ocupacion_usuarios.html', {'usuarios': usuarios, 'STATIC_URL': settings.STATIC_URL})
 
 
@@ -196,3 +184,4 @@ def populateRatings(u, m):
     Puntuacion.objects.bulk_create(lista)
     print("Ratings inserted: " + str(Puntuacion.objects.count()))
     print("---------------------------------------------------------")
+'''
