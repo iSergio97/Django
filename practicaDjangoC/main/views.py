@@ -1,6 +1,6 @@
 # encoding:utf-8
 from main.models import Evento
-from main.forms import UsuarioBusquedaForm, PeliculaBusquedaYearForm
+from main.forms import *
 from django.shortcuts import render
 from django.db.models import Avg
 from django.http.response import HttpResponseRedirect, HttpResponse
@@ -46,3 +46,28 @@ def populateEvents():
 def mostrar_eventos_codigo(request):
     eventos =Evento.objects.all().order_by('codigo')
     return render(request, 'eventos_municipio.html', {'eventos':eventos, 'STATIC_URL':settings.STATIC_URL})
+
+
+def buscarEventosPorIdioma(request):
+    formulario = IdiomaBusquedaForm()
+    eventos = None
+
+    if request.method == 'POST':
+        formulario = IdiomaBusquedaForm(request.POST)
+        if formulario.is_valid():
+            eventos = Evento.objects.all().filter(lenguajes__contains=formulario.cleaned_data['idioma'])
+
+    return render(request, 'busqueda_idiomas.html', {'formulario': formulario, 'eventos': eventos, 'STATIC_URL': settings.STATIC_URL})
+
+
+def buscarEventosPorFecha(request):
+    formulario = EventoBusquedaYearForm()
+    eventos = None
+
+    if request.method == 'POST':
+        formulario = EventoBusquedaYearForm(request.POST)
+        if formulario.is_valid():
+            eventos = Evento.objects.all().filter(fechaInicio=formulario.cleaned_data['year'])
+
+
+    return render(request, 'busqueda_fechas.html', {'formulario': formulario, 'eventos': eventos, 'STATIC_URL': settings.STATIC_URL})

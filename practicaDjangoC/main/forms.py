@@ -1,8 +1,8 @@
 #encoding:utf-8
 from django import forms
    
-class UsuarioBusquedaForm(forms.Form):
-    idUsuario = forms.CharField(label="Id de Usuario", widget=forms.TextInput, required=True)
+class IdiomaBusquedaForm(forms.Form):
+    idioma = forms.CharField(label="Idioma", widget=forms.TextInput, required=True)
     
-class PeliculaBusquedaYearForm(forms.Form):
-    year = forms.IntegerField(label="Año de publicación", widget=forms.TextInput, required=True)
+class EventoBusquedaYearForm(forms.Form):
+    year = forms.IntegerField(label="Año del evento", widget=forms.TextInput, required=True)
