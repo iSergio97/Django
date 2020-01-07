@@ -68,7 +68,7 @@ def buscarEventosPorFecha(request):
         formulario = EventoBusquedaYearForm(request.POST)
         if formulario.is_valid():
             fecha = datetime.strptime(formulario.cleaned_data['year'], '%d/%m/%Y')
+            print(fecha)
             eventos = Evento.objects.all().filter(fechaInicio=fecha)
-
 
     return render(request, 'busqueda_fechas.html', {'formulario': formulario, 'eventos': eventos, 'STATIC_URL': settings.STATIC_URL})
