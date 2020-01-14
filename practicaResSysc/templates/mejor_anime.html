@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block titulo %} Mejor anime {% endblock %}
+
+{% block content %}
+    <dl class="uk-description-list-line">
+        <dt>
+        {{ anime1.animeId }}
+        </dt>
+        <dt>
+        {{ anime1.titulo }}
+        </dt>
+    </dl>
+    <dl class="uk-description-list-line">
+        <dt>
+        {{ anime2.animeId }}
+        </dt>
+        <dt>
+        {{ anime2.titulo }}
+        </dt>
+    </dl>
+
+{% endblock %}

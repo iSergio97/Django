@@ -7,10 +7,10 @@ class Anime(models.Model):
     titulo = models.TextField()
     generos = models.TextField()
     formatoEmision = models.TextField()
-    numEpisodios = models.IntegerField()
+    numEpisodios = models.TextField()
 
 
 class Puntuacion(models.Model):
     idUsuario = models.BigIntegerField()
     animeId = models.ForeignKey("Anime", on_delete=models.CASCADE)
-    puntuacion = models.IntegerField()
+    puntuacionValor = models.IntegerField()

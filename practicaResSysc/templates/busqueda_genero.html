@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block titulo %} Buscar anime por géneros {% endblock %}
+
+{% block content %}
+    <div class="uk-animation-slide-bottom">
+        <form class="uk-form" id="formulario" method="post" action=""> {% csrf_token %}
+                <br>
+                <legend> Buscar anime por género </legend>
+                <input type="text" name="genero" id="genero" placeholder="Introduzca el género del anime">
+                <br>
+                <input class="uk-button" type="submit" value="Realizar búsqueda">
+            </fieldset>
+        </form>
+    </div>
+
+{% if animes %}
+    <h3> Se han encontrado {{ animes|length }}</h3>
+    <dl class="uk-description-list-line">
+        {% for row in animes %}
+            <dt> {{ row.titulo }}</dt>
+            <dt> {{ row.formatoEmision }}</dt>
+            <dt> {{ row.generos }}</dt>
+        {% endfor %}
+    </dl>
+{% endif %}
+
+{% endblock %}
