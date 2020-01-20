@@ -30,7 +30,8 @@ def indexar():
         );''')
 
         messagebox.showinfo("Éxito", "Se ha indexado con éxito")
-    except:
+
+    except BaseException as e:
         messagebox.showerror("Error", "Se ha producido un error al indexar")
 
 
@@ -44,35 +45,39 @@ def getElementNoClass(text, tag):
     return soup.find_all(tag)
 
 
-
-def listadoNoticias():
+def buscar(text):
     try:
-        temas = conn.execute('''SELECT * FROM TEMA WHERE TEMA.CATEGORY = 'Noticia' ''')
-    except:
+        temas = -1
+        if (text.__eq__('Noticia')):
+            temas = conn.execute('''SELECT TITULO FROM TEMA WHERE CATEGORY = 'Noticia' ''')
+
+        else:
+            temas = conn.execute('''SELECT TITULO FROM TEMA WHERE CATEGORY = 'Articulo' ''')
+        if (temas.arraysize == -1):
+            messagebox.showwarning("Warning",
+                                   "Actualmente no existen artículos para listar. Dele a indexar noticias y artículos antes de hacer click sobre buscar")
+        else:
+            mensaje = "Se ha completado la instrucción de forma correcta, guardando " + str(temas.arraysize) + " temas"
+            messagebox.showinfo("Éxito", mensaje)
+
+            tLevel = Toplevel()
+            tLevel.title("Listado de " + str(text.lower()))
+            frame = Frame(tLevel)
+            frame.pack(side=TOP)
+            sb = Scrollbar(tLevel)
+            sb.pack(side=RIGHT, fill=Y)
+            lb = Listbox(tLevel, yscrollcommand=sb.set)
+            lb.pack(side=BOTTOM, fill=BOTH)
+            # TODO: No permitir que se muestra la vista de las noticias/artículos si no se ha indexado previamente
+            for i in temas:
+                lb.insert("end", i[0])
+                lb.insert("end", "")
+
+            lb.pack(expand=YES)
+            sb.config(command=lb.yview)
+
+    except EXCEPTION as e:
         messagebox.showerror("Error", "Se ha intentado buscar noticias sin haber indexado antes.")
-    if (temas.rowcount == -1):
-        messagebox.showwarning("Warning",
-                               "Actualmente no existen artículos para listar. Dele a indexar noticias y artículos antes de hacer click sobre buscar")
-    else:
-        mensaje = "Se ha completado la instrucción de forma correcta, guardando " + str(temas.rowcount) + " temas"
-        messagebox.showinfo("Éxito", mensaje)
-
-    return temas
-
-
-def listadoArticulos():
-    try:
-        temas = conn.execute('''SELECT * FROM TEMA WHERE TEMA.CATEGORY = 'Articulo' ''')
-    except:
-        messagebox.showerror("Error", "Se ha intentado buscar noticias sin haber indexado antes.")
-    if (temas.rowcount == -1):
-        messagebox.showwarning("Warning",
-                               "Actualmente no existen artículos para listar. Dele a indexar noticias y artículos antes de hacer click sobre buscar")
-    else:
-        mensaje = "Se ha completado la instrucción de forma correcta, guardando " + str(temas.rowcount) + " temas"
-        messagebox.showinfo("Éxito", mensaje)
-
-    return temas
 
 
 def ventana():
@@ -85,8 +90,8 @@ def ventana():
     menubar.add_cascade(label="Inicio", menu=firstMenu)
 
     articlesMenu = Menu(menubar, tearoff=0)
-    articlesMenu.add_command(label="Listado de noticias", command=listadoNoticias)
-    articlesMenu.add_command(label="Listado de artículos", command=listadoArticulos)
+    articlesMenu.add_command(label="Listado de noticias", command=lambda: buscar('Noticia'))
+    articlesMenu.add_command(label="Listado de artículos", command=lambda: buscar('Articulo'))
     menubar.add_cascade(label="Listar", menu=articlesMenu)
 
     root.config(menu=menubar)
