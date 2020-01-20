@@ -4,6 +4,5 @@ from .models import *
 
 admin.site.register(Usuario)
 admin.site.register(Tema)
-admin.site.register(Foro)
 admin.site.register(TemaFavoritoUsuario)
 admin.site.register(Respuesta)
