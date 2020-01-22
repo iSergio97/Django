@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
 
-from .forms import UserLogin, UserRegisterForm
-from .models import Usuario, Tema
+from .forms import UserLogin, buscarArticulosCabecera, buscarNoticiasCabecera
+
+from .models import Tema
 
 
 # Create your views here.
@@ -56,48 +56,21 @@ def logout_view(request):
         return redirect("login/")
 
 
-def register_view(request):
-    form = UserRegisterForm()
-    message = ''
-    print(request.user)
+def buscar_articulos(request):
+    form = buscarArticulosCabecera()
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = buscarArticulosCabecera(request.POST)
         if form.is_valid():
-            form.clean()
-            nombre = form.cleaned_data['nombre']
-            print(nombre)
-            apellido = form.cleaned_data['apellido']
-            print(apellido)
-            email = form.cleaned_data['email']
-            print(email)
-            username = form.cleaned_data['username']
-            print(username)
-            password = form.cleaned_data['contraseña']
-            print(password)
-            user = ''
-            try:
-                user = Usuario.objects.get(username=username)
-                message = messages.error(request, "Ya existe un usuario con ese nombre de usuario")
-            except Usuario.DoesNotExist:
-                user = Usuario.objects.create(nombre=nombre, apellido=apellido, email=email, username=username,
-                                              contraseña=password).save()
-                message = messages.success(request, "Ha iniciado sesión con éxito")
-                return redirect('/')
-
-    return render(request, 'register.html',
-                  {'STATIC_URL': settings.STATIC_URL, 'path': 'register', message: 'messages'})
-
-
-def viewArticle(request):
-    query = request.GET.get('id')
-    tema = Tema.objects.get(id=query)
+            temas = Tema.objects.get(cabecera=form.cleaned_data['cabecera'], category='Articulo')
     return render(request, 'articulos.html',
-                  {'STATIC_URL': settings.STATIC_URL, 'path': 'register', tema: 'tema'})
+                  {'STATIC_URL': settings.STATIC_URL, 'path': 'register', temas: 'temas'})
 
 
-
-def viewNotice(request):
-    query = request.GET.get('id')
-    tema = Tema.objects.get(id=query)
-    return render(request, 'noticias.html.html',
-                  {'STATIC_URL': settings.STATIC_URL, 'path': 'register', tema: 'tema'})
+def buscar_noticias(request):
+    form = buscarArticulosCabecera()
+    if request.method == 'POST':
+        form = buscarArticulosCabecera(request.POST)
+        if form.is_valid():
+            temas = Tema.objects.get(cabecera=form.cleaned_data['cabecera'], category='Noticia')
+    return render(request, 'noticias.html',
+                  {'STATIC_URL': settings.STATIC_URL, 'path': 'register', temas: 'temas'})
