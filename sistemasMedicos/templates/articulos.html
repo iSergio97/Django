@@ -1,2 +1,35 @@
 {% extends 'master.html' %}
-{% block title %} Articulos {% endblock %}
+
+{% block titulo %} Busqueda de artículos por palabra clave {% endblock %}
+
+{% block buscarUsuarioActiva %} uk-active {% endblock %}
+
+
+{% block contenido %}
+    <div class="uk-animation-slide-bottom">
+    	<form class="uk-form" id="formulario" method="post" action=''>{% csrf_token %}
+    		<fieldset>
+    			<legend>Busqueda de Eventos</legend>
+    			<input type="text" name="titulo" id="titulo" placeholder="Introduzca la palabra a buscar"/>
+    			<br><br>
+    			<input class="uk-button" type='submit' value='Realizar Busqueda'/>
+    		</fieldset>
+    	</form>
+
+	    <hr>
+
+	    {% if temas %}
+		    <h3> Artículos encontrados:  {{ temas|length }}</h3>
+		    <dl class="uk-description-list-line">
+
+			{% for row in temas %}
+			    <dt>{{row.titulo}}</dt>
+                <dt>{{row.link}}</dt>
+                <dt>{{row.category}}</dt>
+			{% endfor %}
+
+			</dl>
+
+		{% endif %}
+	</div>
+{% endblock %}

@@ -20,9 +20,7 @@ class Usuario(models.Model):
 class Tema(models.Model):
     id = models.IntegerField(primary_key=True)
     titulo = models.TextField()
-    usuario = models.ForeignKey(Usuario, null=True, on_delete=models.DO_NOTHING)
-    numRespuestas = models.IntegerField()
-    ultimaRespuesta = models.DateField(null=True, blank=True)
+    link = models.TextField()
     category = models.TextField(default="", blank=False)
 
 

@@ -2,6 +2,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+import urllib.request
+from bs4 import BeautifulSoup
 
 from .forms import UserLogin, buscarArticulosCabecera, buscarNoticiasCabecera
 
@@ -56,12 +58,71 @@ def logout_view(request):
         return redirect("login/")
 
 
+def populate_temas():
+    def getElement(text, tag, clase):
+        soup = BeautifulSoup(text, "html.parser")
+        return soup.find_all(tag, class_=clase)
+
+    def getElementNoClass(text, tag):
+        soup = BeautifulSoup(text, "html.parser")
+        return soup.find_all(tag)
+
+    Tema.objects.all().delete()
+    listaTemas = []
+
+
+    for p in range(3):
+        read = urllib.request.urlopen("https://medicinaysaludpublica.com/categoria/noticias/page/" + str(p))
+
+        div = getElement(read, "div", ["content-archive-wrapper-1"])
+        for i in div:
+            article = getElement(str(i), "article", ["post","type-post","status-publish","format-standard","category-noticias"])
+            for j in article:
+                div1 = getElement(str(j), "div", ["entry-content"])
+                for k in div1:
+                    h2 = getElement(str(k), "h2", ["entry-post-title"])
+                    for x in range(len(h2)):
+                        a = h2[x].find("a")
+                        id = 1
+                        title = a.string
+                        link = a["href"]
+                        category = "Noticia"
+
+                        tema = Tema(id=id,titulo=title, link=link, category=category)
+                        listaTemas.append(tema)
+                        id = id + 1
+
+    for p in range(3):
+        read = urllib.request.urlopen("https://medicinaysaludpublica.com/categoria/articulos/page/" + str(p))
+
+        div = getElement(read, "div", ["content-archive-wrapper-1"])
+        for i in div:
+            article = getElement(str(i), "article", ["post","type-post","status-publish","format-standard","category-articulos"])
+            for j in article:
+                div1 = getElement(str(j), "div", ["entry-content"])
+                for k in div1:
+                    h2 = getElement(str(k), "h2", ["entry-post-title"])
+                    for x in range(len(h2)):
+                        a = h2[x].find("a")
+                        id = len(listaTemas) + 1
+                        title = a.string
+                        link = a["href"]
+                        category = "Articulo"
+
+                        tema = Tema(id=id,titulo=title,link=link,category=category)
+                        listaTemas.append(tema)
+                        id = id + 1
+
+
+    Tema.objects.bulk_create(listaTemas)
+
+
 def buscar_articulos(request):
     form = buscarArticulosCabecera()
     if request.method == 'POST':
         form = buscarArticulosCabecera(request.POST)
         if form.is_valid():
-            temas = Tema.objects.get(cabecera=form.cleaned_data['cabecera'], category='Articulo')
+            temas = Tema.objects.get(titulo=form.cleaned_data['titulo'], category='Articulo')
     return render(request, 'articulos.html',
                   {'STATIC_URL': settings.STATIC_URL, 'path': 'register', temas: 'temas'})
 
@@ -71,6 +132,6 @@ def buscar_noticias(request):
     if request.method == 'POST':
         form = buscarArticulosCabecera(request.POST)
         if form.is_valid():
-            temas = Tema.objects.get(cabecera=form.cleaned_data['cabecera'], category='Noticia')
+            temas = Tema.objects.get(titulo=form.cleaned_data['titulo'], category='Noticia')
     return render(request, 'noticias.html',
                   {'STATIC_URL': settings.STATIC_URL, 'path': 'register', temas: 'temas'})
