@@ -1,0 +1,33 @@
+{% extends 'master.html' %}
+{% block title %} Register {% endblock %}
+{% block content %}
+    <form method="post" action="">{% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" placeholder="Nombre" required id="nombre" name="nombre">
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" placeholder="Apellidos" required id="apellido"
+                       name="apellido">
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="Email" aria-describedby="inputGroupPrepend"
+                           required name="email" id="email">
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" placeholder="Nombre de usuario" required id="username"
+                       name="username">
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="password" class="form-control" placeholder="Contraseña" required id="contraseña"
+                       name="contraseña">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Registrarse</button>
+    </form>
+{% endblock %}
