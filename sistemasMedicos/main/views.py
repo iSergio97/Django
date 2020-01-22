@@ -34,8 +34,7 @@ def login_view(request):
             form.clean()
             username = form.cleaned_data['username']
             password = form.cleaned_data['contraseña']
-            hashed = make_password(password)
-            user = authenticate(username=username, password=hashed)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 message = messages.success(request, "Ha iniciado sesión con éxito")
