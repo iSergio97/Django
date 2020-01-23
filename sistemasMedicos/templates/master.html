@@ -19,12 +19,12 @@
         <li class="nav-item">
             <a href="/noticias" class="nav-link {% if path == 'noticias' %} active {% endif %}"> Noticias </a>
         </li>
+            <li class="nav-item">
+            <a href="/popular" class="nav-link {% if path == 'popular' %} active {% endif %}"> Popular temas </a>
+        </li>
         {% if not request.user.is_authenticated %}
             <li class="nav-item">
                 <a href="/login" class="nav-link {% if path == 'login' %} active {% endif %}"> Login </a>
-            </li>
-            <li class="nav-item">
-                <a href="/register" class="nav-link {% if path == 'register' %} active {% endif %}"> Register </a>
             </li>
         {% endif %}
         {% if request.user.is_authenticated %}

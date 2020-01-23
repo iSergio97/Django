@@ -1,11 +1,6 @@
 {% extends 'master.html' %}
 {% block title %} Login {% endblock %}
 {% block content %}
-    <script type="text/css">
-        p {
-            background-color: yellow;
-        }
-    </script>
     <div class="login-dark">
         <form method="post" method="post" action="">{% csrf_token %}
             <h2 class="sr-only">Login Form</h2>

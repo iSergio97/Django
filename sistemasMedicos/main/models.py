@@ -20,7 +20,7 @@ class Usuario(models.Model):
 class Tema(models.Model):
     id = models.IntegerField(primary_key=True)
     titulo = models.TextField()
-    link = models.TextField()
+    link = models.TextField(default='')
     category = models.TextField(default="", blank=False)
 
 

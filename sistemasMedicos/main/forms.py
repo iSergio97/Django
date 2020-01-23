@@ -6,9 +6,5 @@ class UserLogin(forms.Form):
     contraseña = forms.CharField()
 
 
-class buscarNoticiasCabecera(forms.Form):
-    temas = forms.CharField(label="Palabra clave", widget=forms.TextInput, required=True)
-
-
-class buscarArticulosCabecera(forms.Form):
-    temas = forms.CharField(label="Palabra clave", widget=forms.TextInput, required=True)
+class buscarTemasTitulo(forms.Form):
+    titulo = forms.CharField(label="Palabra clave", widget=forms.TextInput, required=True)
