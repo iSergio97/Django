@@ -63,7 +63,7 @@ def populate_temas(request):
     sslC = ssl.SSLContext()
 
     for p in range(3):
-        read = urllib.request.urlopen(url=("https://medicinaysaludpublica.com/categoria/noticias/page/" + str(p)),
+        read = urllib.request.urlopen(url=("https://medicinaysaludpublica.com/categoria/noticias/page/" + str(p+1)),
                                       context=sslC)
 
         div = getElement(read, "div", ["content-archive-wrapper-1"])
@@ -85,7 +85,7 @@ def populate_temas(request):
                         id = id + 1
 
     for p in range(3):
-        read = urllib.request.urlopen("https://medicinaysaludpublica.com/categoria/articulos/page/" + str(p),
+        read = urllib.request.urlopen("https://medicinaysaludpublica.com/categoria/articulos/page/" + str(p+1),
                                       context=sslC)
 
         div = getElement(read, "div", ["content-archive-wrapper-1"])
@@ -114,27 +114,24 @@ def populate_temas(request):
 
 def buscar_articulos(request):
     form = buscarTemasTitulo()
-    temas = None
+    temas = ''
     if request.method == 'POST':
         form = buscarTemasTitulo(request.POST)
         if form.is_valid():
             titulo = form.cleaned_data['titulo']
             temas = Tema.objects.all().filter(titulo__contains=titulo, category='Articulo')
     return render(request, 'articulos.html',
-                  {temas: 'temas', 'STATIC_URL': settings.STATIC_URL, 'path': 'articulos'})
+                  {'temas': temas, 'STATIC_URL': settings.STATIC_URL, 'path': 'articulos'})
 
 
 def buscar_noticias(request):
     form = buscarTemasTitulo()
-    temasQuery = None
+    temas = ''
     if request.method == 'POST':
         form = buscarTemasTitulo(request.POST)
         if form.is_valid():
             titulo = form.cleaned_data['titulo']
-            temasQuery = Tema.objects.all().filter(titulo__contains=titulo, category='Noticia')
-            for r in temasQuery:
-                print(r.titulo)
-                print(r.link)
+            temas = Tema.objects.all().filter(titulo__contains=titulo, category='Noticia')
 
     return render(request, 'noticias.html',
-                  {temasQuery: 'temas', 'STATIC_URL': settings.STATIC_URL, 'path': 'noticias'})
+                  {'temas': temas, 'STATIC_URL': settings.STATIC_URL, 'path': 'noticias'})

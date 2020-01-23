@@ -17,13 +17,12 @@
         </form>
         <hr>
         {% if temas %}
-            {{ temas }}
             <h3> Artículos encontrados: {{ temas|length }}</h3>
             <dl class="uk-description-list-line">
 
                 {% for row in temas %}
                     <dt>{{ row.titulo }}</dt>
-                    <dt>{{ row.link }}</dt>
+                    <a href="{{ row.link }}" target="_blank"> Link a la noticia </a>
                 {% endfor %}
             </dl>
         {% endif %}
